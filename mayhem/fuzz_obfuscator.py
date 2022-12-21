@@ -1,4 +1,6 @@
 #! /usr/bin/env python3
+from tokenize import TokenError
+
 import atheris
 import sys
 import io
@@ -7,7 +9,7 @@ from contextlib import contextmanager
 import fuzz_helpers
 
 sys.path.append('../')  # This project is not distributed as an installable package
-with atheris.instrument_imports():
+with atheris.instrument_imports(include=['hyperion']):
     import hyperion
 
 
@@ -29,7 +31,7 @@ def TestOneInput(data):
             hyperion.Hyperion(fdp.ConsumeRandomString(), fdp.ConsumeBool(), fdp.ConsumeBool(), fdp.ConsumeBool(),
                      fdp.ConsumeBool(), fdp.ConsumeBool(), fdp.ConsumeBool(), fdp.ConsumeBool(),
                      fdp.ConsumeBool(), fdp.ConsumeBool())
-    except UnboundLocalError:
+    except (UnboundLocalError, AttributeError, TokenError):
         return -1
 
 
