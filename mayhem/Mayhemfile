@@ -1,0 +1,9 @@
+project: Hyperion
+target: obfu-fuzz
+testsuite:
+    - file://testsuite
+
+cmds:
+  - cmd: /src/mayhem/fuzz_obfuscator.py
+    libfuzzer: true
+    timeout: 5
