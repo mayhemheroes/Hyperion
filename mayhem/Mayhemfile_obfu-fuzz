@@ -1,0 +1,16 @@
+# Mayhem target: Hyperion Python obfuscator (Atheris/libFuzzer harness).
+# The cmd binary is the compiled ELF launcher that drives mayhem/fuzz_obfuscator.py;
+# Atheris instruments the hyperion module so the run records coverage (edges).
+project: Hyperion
+target: obfu-fuzz
+
+cmds:
+  - cmd: /mayhem/hyperion_fuzzer
+    libfuzzer: true
+    timeout: 10
+
+# Seed corpus lives under mayhem/testsuite/obfu-fuzz (bootstrap inputs).
+# No `testsuite:` directive — Mayhem accumulates a persistent server-side corpus (issue #124).
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/obfu-fuzz/testsuite

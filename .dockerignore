@@ -1,0 +1,14 @@
+# Keep the build context lean. Exclude files that are not needed in the
+# commit image and would only bloat the layer or confuse the build.
+# The full source tree (incl. .git) IS required — the PATCH tier re-runs
+# build.sh from the source tree and the grader reads .git for commit metadata.
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.mypy_cache
+.tox
+.nox
+*.egg-info
+dist
+build
